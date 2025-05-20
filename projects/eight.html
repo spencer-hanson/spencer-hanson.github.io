@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="css/styles.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js" integrity="sha512-SYfDUYPg5xspsG6OOpXU366G8SZsdHOhqk/icdrYJ2E/WKZxPxze7d2HD3AyXpT7U22PZ5y74xRpqZ6A2bJ+kQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+
+
+
+window.onload = function() {
+  var md = window.markdownit();
+  var div = document.getElementsByClassName('markdown');
+  for(var i = 0; i < div.length; i++) {
+    var content = div[i].innerHTML;
+    document.getElementsByClassName('markdown')[i].innerHTML = md.render(content);
+  }
+    loadXMLDoc("https://raw.githubusercontent.com/spencer-hanson/Eight/refs/heads/main/README.md")
+
+}
+function loadXMLDoc(theURL) {
+    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari, SeaMonkey
+        xmlhttp = new XMLHttpRequest();
+    } else {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var md = window.markdownit();
+            document.getElementById("markdownHere").innerHTML = md.render(xmlhttp.responseText);
+        }
+    }
+    xmlhttp.open("GET", theURL, false);
+    xmlhttp.send();
+}
+
+</script>
+
+</head>
+<body>
+
+<!--https://raw.githubusercontent.com/spencer-hanson/Eight/refs/heads/main/README.md-->
+<div class="markdown" id="markdownHere"></div>
+
+</body>
+</html>
